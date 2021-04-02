@@ -39,8 +39,8 @@ export class BookDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap
       .subscribe((params: ParamMap) => {
-        const libraryId = +params.get('lid');
-        const bookId = +params.get('id');
+        const libraryId = parseInt(params.get('lid'), 10);
+        const bookId = parseInt(params.get('id'), 10);
         this.getBookDetails(libraryId, bookId);
       });
   }
@@ -95,12 +95,12 @@ export class BookDetailsComponent implements OnInit {
       this.books.getNumberOfAvailableBookCopies(libraryId, bookId),
       this.memberService.getSignedOutBooks(this.authService.currentMember)
     ]).pipe(
-      take(1),
       tap(([book, numberOfAvailableCopies, signedOutBooks]) => {
         this.numBooksSignedOut = signedOutBooks.length;
         this.numBooksAvailable = numberOfAvailableCopies;
         this.numOfThisBookSignedOutByUser = filter(signedOutBooks, (signedOutBook) => signedOutBook.bookId === book.bookId).length;
         const isbn = book.isbn;
+        console.log(isbn);
         this.books.getBookMetaData(isbn)
           .pipe(take(1))
           .subscribe((bookMetadata: GoogleBooksMetadata) => {

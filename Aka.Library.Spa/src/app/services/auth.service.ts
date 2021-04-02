@@ -29,6 +29,9 @@ export class AuthService {
         tap(res => {
           this.isAuthenticated = res !== null;
           this.currentMember = res;
+          this.loggedIn.next(this.isAuthenticated);
+          localStorage.setItem('user', JSON.stringify(res));
+
         })
       );
   }
@@ -36,6 +39,7 @@ export class AuthService {
   logout(): void {
     this.isAuthenticated = false;
     this.currentMember = null;
+    localStorage.removeItem('user')
   }
 
 }

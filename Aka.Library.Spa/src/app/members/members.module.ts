@@ -1,3 +1,4 @@
+import { CheckedOutModule } from './../checked-out/checked-out.module';
 import { MemberBookListComponent } from './member-book-list/member-book-list.component';
 import { LibraryMatModule } from './../library-mat.module';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,8 @@ import { MemberDetailsComponent } from './member-details/member-details.componen
   imports: [
     CommonModule,
     MembersRoutingModule,
-    LibraryMatModule
+    LibraryMatModule,
+    CheckedOutModule
   ],
   exports: [
     MemberListComponent,
